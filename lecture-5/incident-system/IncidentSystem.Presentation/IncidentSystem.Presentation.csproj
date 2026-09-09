@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IncidentSystem.Domain\IncidentSystem.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IncidentSystem.Infrastructure\IncidentSystem.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

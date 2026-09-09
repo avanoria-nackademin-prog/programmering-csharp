@@ -3,7 +3,7 @@ using IncidentSystem.Infrastructure.Stores;
 
 namespace IncidentSystem.Infrastructure.Repositories;
 
-public class InMemoryCustomerRepository : ICustomerRepository
+internal class InMemoryCustomerRepository : ICustomerRepository
 {
     public void Create(Customer customer)
     {
