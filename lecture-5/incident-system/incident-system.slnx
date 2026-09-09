@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="IncidentSystem.Application/IncidentSystem.Application.csproj" Id="00e91f01-e3ad-4577-89de-53a7a354d6d1" />
   <Project Path="IncidentSystem.Domain/IncidentSystem.Domain.csproj" Id="cf47ca43-ca50-4b59-a58b-a6329dac1ffb" />
   <Project Path="IncidentSystem.Infrastructure/IncidentSystem.Infrastructure.csproj" Id="d08d5fa3-f456-40ae-853f-312be7908ca5" />
   <Project Path="IncidentSystem.Presentation/IncidentSystem.Presentation.csproj" />
