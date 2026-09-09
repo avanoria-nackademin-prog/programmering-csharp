@@ -2,6 +2,5 @@
 
 public interface ICustomerDialog
 {
-    void AddCustomerDialog();
-    void ShowAllCustomersDialog();
+    void CustomerMenuDialog();
 }
