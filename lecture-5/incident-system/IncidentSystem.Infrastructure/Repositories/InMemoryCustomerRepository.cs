@@ -5,11 +5,13 @@ namespace IncidentSystem.Infrastructure.Repositories;
 
 internal class InMemoryCustomerRepository : ICustomerRepository
 {
-    public void Create(Customer customer)
+    public bool Create(Customer customer)
     {
         ArgumentNullException.ThrowIfNull(customer);
 
         InMemoryCustomerStore.Customers.Add(customer);
+
+        return true;
     }
 
     public IReadOnlyList<Customer> GetAll()
@@ -27,7 +29,7 @@ internal class InMemoryCustomerRepository : ICustomerRepository
     }
 
 
-    public void Update(Customer customer)
+    public bool Update(Customer customer)
     {
         ArgumentNullException.ThrowIfNull(customer);
 
@@ -37,13 +39,17 @@ internal class InMemoryCustomerRepository : ICustomerRepository
             throw new KeyNotFoundException($"Customer with Id '{customer.CustomerId}' was not found.");
 
         InMemoryCustomerStore.Customers[index] = customer;
+
+        return true;
     }
 
-    public void Delete(Customer customer)
+    public bool Delete(Customer customer)
     {
         ArgumentNullException.ThrowIfNull(customer);
 
         InMemoryCustomerStore.Customers.Remove(customer);
+
+        return true;
     }
 
 }

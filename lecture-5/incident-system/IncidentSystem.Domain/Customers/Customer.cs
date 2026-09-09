@@ -10,7 +10,7 @@ public class Customer(Guid customerId, string customerName, string emailAddress,
     private static string NormalizeRequiredCustomerId(Guid customerId)
     {
         if (customerId == Guid.Empty)
-            throw new InvalidOperationException("Customer id is required");
+            throw new ArgumentException("Customer id is required");
 
         return customerId.ToString();
     }
@@ -19,10 +19,10 @@ public class Customer(Guid customerId, string customerName, string emailAddress,
     private static string NormalizeRequiredName(string propertyName, string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new InvalidOperationException($"{propertyName} is required");
+            throw new ArgumentException($"{propertyName} is required");
 
         if (name.Length < 2)
-            throw new InvalidOperationException($"{propertyName} must be a valid name and contain at least 2 letters");
+            throw new ArgumentException($"{propertyName} must be a valid name and contain at least 2 letters");
 
         return name.Trim();
     }
@@ -30,10 +30,10 @@ public class Customer(Guid customerId, string customerName, string emailAddress,
     private static string NormalizeRequiredEmailAddress(string emailAddress)
     {
         if (string.IsNullOrWhiteSpace(emailAddress))
-            throw new InvalidOperationException("Email is required");
+            throw new ArgumentException("Email is required");
 
         if (!emailAddress.Contains('@'))
-            throw new InvalidOperationException("Email must be a valid email address");
+            throw new ArgumentException("Email must be a valid email address");
 
         return emailAddress.Trim().ToLower();
     }

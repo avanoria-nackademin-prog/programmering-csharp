@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IncidentSystem.Application\IncidentSystem.Application.csproj" />
     <ProjectReference Include="..\IncidentSystem.Infrastructure\IncidentSystem.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -2,9 +2,9 @@
 
 public interface ICustomerRepository
 {
-    void Create(Customer customer);
-    void Delete(Customer customer);
+    bool Create(Customer customer);
+    bool Delete(Customer customer);
     IReadOnlyList<Customer> GetAll();
     Customer? GetById(string customerId);
-    void Update(Customer customer);
+    bool Update(Customer customer);
 }
