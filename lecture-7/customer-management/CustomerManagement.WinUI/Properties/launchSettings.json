@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CustomerManagement.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CustomerManagement.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

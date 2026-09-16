@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="CustomerManagement.WinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomerManagement.WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:models="using:CustomerManagement.Shared.Models"
+    
+    mc:Ignorable="d"
+    Title="CustomerManagement.WinUI">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid x:Name="RootGrid" Padding="20" RowSpacing="15">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Spacing="12">
+            <TextBox x:Name="NameTextBox" Header="Customer name" />
+            <TextBox x:Name="EmailTextBox" Header="Email address" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Spacing="12" Orientation="Horizontal">
+            <Button x:Name="AddCustomerButton" Click="AddCustomerButton_Click" Content="Add Customer" />
+            <Button x:Name="DeleteSelectedButton" Click="DeleteSelectedButton_Click" Content="Delete Selected" />
+        </StackPanel>
+
+        <ListView x:Name="CustomersListView" Grid.Row="2" SelectionMode="Single" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Customer">
+
+                    <StackPanel Padding="8" Spacing="4">
+                        <TextBlock Text="{x:Bind Name}" />
+                        <TextBlock Text="{x:Bind Email}" />
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="StatusTextBlock" Grid.Row="3" Text="Customers: 0" />
+
+    </Grid>
+</Window>
