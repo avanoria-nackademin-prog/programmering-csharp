@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="CustomerManagement.Shared/CustomerManagement.Shared.csproj" />
   <Project Path="CustomerManagement.WinForms/CustomerManagement.WinForms.csproj" />
+  <Project Path="CustomerManagement.Wpf/CustomerManagement.Wpf.csproj" />
 </Solution>

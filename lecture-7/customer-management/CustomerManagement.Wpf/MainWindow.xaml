@@ -1,0 +1,57 @@
+﻿<Window x:Class="CustomerManagement.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomerManagement.Wpf"
+        mc:Ignorable="d"
+        Title="Customer Management" 
+        Height="450" 
+        Width="720"
+        MinHeight="450" 
+        MinWidth="520"
+        WindowStartupLocation="CenterScreen"
+        >
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Customer name" />
+            <TextBox x:Name="NameTextBox" Padding="6" Margin="0,5,0,12" />
+            <TextBlock Text="Email address" />
+            <TextBox x:Name="EmailTextBox" Padding="6" Margin="0,5,0,12" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,15">
+            <Button x:Name="AddCustomerButton" Content="Add Customer" Width="150" Padding="14,8" Margin="0,0,10,0" />
+            <Button x:Name="DeleteSelectedButton" Content="Delete Selected" Width="150" Padding="14,8" />
+        </StackPanel>
+
+        <DataGrid x:Name="CustomersDataGrid" 
+                    Grid.Row="2" 
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    SelectionMode="Single"
+                    SelectionUnit="FullRow" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer name"
+                                        Binding="{Binding Name}"
+                                        Width="*" />
+
+                <DataGridTextColumn Header="Email address"
+                                        Binding="{Binding Email}"
+                                        Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock x:Name="StatusTextBlock" Grid.Row="3" Text="Customers: 0" Margin="0,12,0,0" />
+
+    </Grid>
+</Window>
