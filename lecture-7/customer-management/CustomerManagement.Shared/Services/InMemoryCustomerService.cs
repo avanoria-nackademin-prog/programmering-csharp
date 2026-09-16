@@ -42,5 +42,5 @@ public class InMemoryCustomerService : ICustomerService
         return _customers.Remove(customer);
     }
 
-    public IReadOnlyCollection<Customer> GetAll() => _customers;
+    public IReadOnlyList<Customer> GetAll() => [.. _customers];
 }
