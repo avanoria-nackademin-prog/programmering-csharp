@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CustomerManagment.GuiApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CustomerManagment.GuiApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
