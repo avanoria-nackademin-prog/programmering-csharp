@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="CustomerApp.Views.CreateCustomerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomerApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <Grid Padding="28">
+            <StackPanel
+                MaxWidth="720"
+                HorizontalAlignment="Stretch"
+                Spacing="24">
+
+                <!-- Sidhuvud -->
+                <StackPanel Spacing="16">
+                    <Button
+                        Style="{StaticResource BackButtonStyle}"
+                        Command="{x:Bind ViewModel.CancelCommand}">
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <SymbolIcon Symbol="Back" />
+                            <TextBlock Text="Till kundlistan" />
+                        </StackPanel>
+                    </Button>
+
+                    <StackPanel Spacing="6">
+                        <TextBlock
+                            Text="Lägg till kund"
+                            Style="{StaticResource PageHeadingStyle}" />
+
+                        <TextBlock
+                            Text="Registrera en privatkund eller ett företag."
+                            Style="{StaticResource DescriptionStyle}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Kundtyp -->
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="18">
+                        <StackPanel Spacing="6">
+                            <TextBlock
+                                Text="Kundtyp"
+                                Style="{StaticResource SectionHeadingStyle}" />
+
+                            <TextBlock
+                                Text="Aktivera reglaget om kunden är ett företag."
+                                Style="{StaticResource DescriptionStyle}" />
+                        </StackPanel>
+
+                        <ToggleSwitch
+                            OffContent="Privatkund"
+                            OnContent="Företag"
+                            AutomationProperties.Name="Kundtyp"
+                            IsOn="{x:Bind ViewModel.IsCompany, Mode=TwoWay}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Kontaktuppgifter -->
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="20">
+                        <StackPanel Spacing="6">
+                            <TextBlock
+                                Text="Kontaktuppgifter"
+                                Style="{StaticResource SectionHeadingStyle}" />
+
+                            <TextBlock
+                                Text="Fyll i namn och e-postadress. Båda fälten krävs."
+                                Style="{StaticResource DescriptionStyle}" />
+                        </StackPanel>
+
+                        <TextBox
+                            Header="{x:Bind ViewModel.NameLabel, Mode=OneWay}"
+                            PlaceholderText="Ange namn"
+                            Style="{StaticResource FormTextBoxStyle}"
+                            Text="{x:Bind ViewModel.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBox
+                            Header="E-postadress"
+                            PlaceholderText="namn@exempel.se"
+                            Style="{StaticResource FormTextBoxStyle}"
+                            Text="{x:Bind ViewModel.EmailAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Status -->
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ProgressRing
+                        Width="18"
+                        Height="18"
+                        VerticalAlignment="Center"
+                        IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}" />
+
+                    <TextBlock
+                        Grid.Column="1"
+                        Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                        Style="{StaticResource DescriptionStyle}" />
+                </Grid>
+
+                <!-- Åtgärder -->
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="12">
+
+                    <Button
+                        Content="Avbryt"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Command="{x:Bind ViewModel.CancelCommand}" />
+
+                    <Button
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{x:Bind ViewModel.SaveCommand}">
+
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <SymbolIcon Symbol="Save" />
+                            <TextBlock Text="Spara kund" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

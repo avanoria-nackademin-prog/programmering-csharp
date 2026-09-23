@@ -15,7 +15,7 @@
 
                 <!-- Sidhuvud -->
                 <StackPanel Spacing="16">
-                    <Button>
+                    <Button Style="{StaticResource BackButton}" Command="{x:Bind ViewModel.CancelCommand}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <SymbolIcon Symbol="Back" />
                             <TextBlock Text="Till kundlistan" />
@@ -29,7 +29,7 @@
                 </StackPanel>
 
                 <!-- Kundtyp -->
-                <Border Style="{StaticResource SurfaceCardStyle}">
+                <Border>
                     <StackPanel Spacing="18">
                         <StackPanel Spacing="6">
                             <TextBlock Text="Kundtyp" />
@@ -79,11 +79,10 @@
                 <!-- Åtgärder -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
 
-                    <Button Content="Avbryt" />
+                    <Button Content="Avbryt" Style="{StaticResource SecondaryButton}" Command="{x:Bind ViewModel.CancelCommand}" />
 
-                    <Button>
+                    <Button Style="{StaticResource SaveButton}" Command="{x:Bind ViewModel.SaveCommand}">
                         <StackPanel Orientation="Horizontal" Spacing="10">
-                            <SymbolIcon Symbol="Save" />
                             <TextBlock Text="Spara kund" />
                         </StackPanel>
                     </Button>

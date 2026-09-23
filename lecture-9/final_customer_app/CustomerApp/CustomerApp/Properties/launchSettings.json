@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CustomerApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CustomerApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

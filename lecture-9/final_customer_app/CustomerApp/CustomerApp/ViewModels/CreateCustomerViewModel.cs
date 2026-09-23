@@ -38,7 +38,7 @@ public partial class CreateCustomerViewModel(ICustomerService customerService, I
 
         try
         {
-            await customerService.CreateCustomerAsync(CustomerName, EmailAddress, IsCompany);
+            await customerService.CreateAsync(CustomerName, EmailAddress, IsCompany);
         }
         catch (ArgumentException ex)
         {

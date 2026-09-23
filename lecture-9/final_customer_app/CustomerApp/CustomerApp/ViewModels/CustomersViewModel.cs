@@ -2,8 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CustomerApp.Models;
 using CustomerApp.Navigation;
-using CustomerApp.Repositories;
 using CustomerApp.Services;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -14,6 +14,10 @@ public partial class CustomersViewModel(ICustomerService customerService, INavig
     public ObservableCollection<Customer> Customers { get; } = [];
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(DeleteCustomerCommand))]
+    public partial Customer? SelectedCustomer { get; set; }
+
+    [ObservableProperty]
     public partial string StatusMessage { get; private set; } = string.Empty;
 
     [ObservableProperty]
@@ -22,13 +26,13 @@ public partial class CustomersViewModel(ICustomerService customerService, INavig
 
     public bool IsNotBusy => !IsBusy;
 
-    public async Task LoadCustomersAsync()
+    public async Task LoadAsync()
     {
         IsBusy = true;
 
         try
         {
-            var customers = await customerService.GetAllCustomersAsync();
+            var customers = await customerService.GetAllAsync();
 
             Customers.Clear();
 
@@ -36,11 +40,10 @@ public partial class CustomersViewModel(ICustomerService customerService, INavig
                 Customers.Add(customer);
 
             StatusMessage = $"{Customers.Count} kunder.";
-
         }
-        catch
+        catch (Exception)
         {
-            StatusMessage = "Kunder kunde inte läsas in från angiven fil.";
+            StatusMessage = "Kunderna kunde inte läsas in. Kontrollera filen och sökvägen i inställningarna.";
         }
         finally
         {
@@ -48,10 +51,38 @@ public partial class CustomersViewModel(ICustomerService customerService, INavig
         }
     }
 
-
     [RelayCommand]
     private void OpenCreateCustomer()
     {
         navigationService.Navigate(AppPage.CreateCustomer);
+    }
+
+    private bool CanDeleteCustomer() => SelectedCustomer is not null;
+
+    [RelayCommand(CanExecute = nameof(CanDeleteCustomer))]
+    private async Task DeleteCustomerAsync()
+    {
+        if (SelectedCustomer is not { } customer)
+            return;
+
+        IsBusy = true;
+
+        try
+        {
+            await customerService.DeleteAsync(customer.Id);
+
+            Customers.Remove(customer);
+            SelectedCustomer = null;
+
+            StatusMessage = "Kunden har tagits bort.";
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Kunden kunde inte tas bort.";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
