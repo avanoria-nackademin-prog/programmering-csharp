@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Presentation.WinApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Presentation.WinApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
