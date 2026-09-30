@@ -23,6 +23,6 @@ public class CustomerService(ICustomerRepository customerRepository) : ICustomer
 
     public IReadOnlyList<Customer> GetAllCustomers()
     {
-        throw new NotImplementedException();
+        return customerRepository.GetAll();
     }
 }
