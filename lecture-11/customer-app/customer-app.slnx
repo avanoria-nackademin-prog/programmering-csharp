@@ -3,4 +3,5 @@
   <Project Path="CustomerApp.Domain/CustomerApp.Domain.csproj" />
   <Project Path="CustomerApp.Infrastructure/CustomerApp.Infrastructure.csproj" />
   <Project Path="CustomerApp.Presentation/CustomerApp.Presentation.csproj" />
+  <Project Path="CustomerApp.Tests/CustomerApp.Tests.csproj" Id="4f77517e-985a-460f-b486-4134ab9d3143" />
 </Solution>
