@@ -5,55 +5,66 @@ namespace CustomerApp.Tests.Domain;
 public class EmailAddressTests
 {
     [Theory]
-    [InlineData("hans@example.com")]
-    [InlineData("first.last@example.com")]
-    [InlineData("hans+kurs@example.com")]
-    public void Constructor_WithValidEmail_SetsValue(string email)
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData(null)]
+    public void EnsureRequired_Should_ThrowExceptionWhenNullOrEmpty(string? value)
     {
-        var emailAddress = new EmailAddress(email);
+        // Act
+        var exception = Assert.Throws<ArgumentException>(() => new EmailAddress(value!));
 
-        Assert.Equal(email, emailAddress.Value);
-    }
-
-    [Fact]
-    public void Constructor_WithSurroundingWhitespace_TrimsValue()
-    {
-        var emailAddress = new EmailAddress("  hans@example.com  ");
-
-        Assert.Equal("hans@example.com", emailAddress.Value);
+        // Assert
+        Assert.Equal("E-postadress krävs. (Parameter 'value')", exception.Message);
     }
 
     [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData("   ")]
-    public void Constructor_WithMissingEmail_ThrowsArgumentException(string? email)
+    [InlineData("  hans@example.com  ", "hans@example.com")]
+    [InlineData("\tkontakt@avanoria.se\n", "kontakt@avanoria.se")]
+    public void Normalize_Should_TrimWhiteSpaces_ReturnValidEmailAddress(string value, string expectedValue)
     {
-        var exception = Assert.Throws<ArgumentException>(
-            () => new EmailAddress(email!));
+        // Act
+        var emailAddress = new EmailAddress(value);
 
-        Assert.Equal("E-postadress krävs.", exception.Message);
+        // Assert
+        Assert.Equal(expectedValue, emailAddress.Value);
+    }
+
+    [Theory]
+    [InlineData("hans@example.com")]
+    [InlineData("kontakt@avanoria.se")]
+    public void Validate_Should_CreateEmailAddressWhenEmailAddressIsValid(string value)
+    {
+        // Act
+        var emailAddress = new EmailAddress(value);
+
+        // Assert
+        Assert.Equal(value, emailAddress.Value);
     }
 
     [Theory]
     [InlineData("not-an-email")]
     [InlineData("hans@")]
     [InlineData("@example.com")]
-    public void Constructor_WithInvalidEmail_ThrowsArgumentException(string email)
+    [InlineData("Hans <hans@example.com>")]
+    public void Validate_Should_ThrowExceptionWhenEmailAddressHasInvalidFormat(string value)
     {
-        var exception = Assert.Throws<ArgumentException>(
-            () => new EmailAddress(email));
+        // Act
+        var exception = Assert.Throws<ArgumentException>(() => new EmailAddress(value));
 
-        Assert.Equal("E-postadressen är inte giltig.", exception.Message);
+        // Assert
+        Assert.Equal("E-postadressen är inte giltig. (Parameter 'value')", exception.Message);
     }
 
     [Fact]
-    public void Constructor_WhenMailAddressParsesToDifferentAddress_ThrowsArgumentException()
+    public void ToString_Should_ReturnEmailAddressValue()
     {
-        // MailAddress kan acceptera visningsnamn, men Value ska vara en ren e-postadress.
-        var exception = Assert.Throws<ArgumentException>(
-            () => new EmailAddress("Hans <hans@example.com>"));
+        // Arrange
+        var emailAddress = new EmailAddress("hans@example.com");
 
-        Assert.Equal("E-postadressen är inte giltig.", exception.Message);
+        // Act
+        var result = emailAddress.ToString();
+
+        // Assert
+        Assert.Equal("hans@example.com", result);
     }
 }
