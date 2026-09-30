@@ -43,7 +43,7 @@ public class EmailAddressTests
 
     [Theory]
     [InlineData("not-an-email")]
-    [InlineData("hans@")]
+    [InlineData("name@")]
     [InlineData("@example.com")]
     [InlineData("Hans <hans@example.com>")]
     public void Validate_Should_ThrowExceptionWhenEmailAddressHasInvalidFormat(string value)
