@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="IncidentManagement.Api/IncidentManagement.Api.csproj" />
+  <Project Path="IncidentManagement.Application/IncidentManagement.Application.csproj" />
+  <Project Path="IncidentManagement.Domain/IncidentManagement.Domain.csproj" />
+  <Project Path="IncidentManagement.Infrastructure/IncidentManagement.Infrastructure.csproj" />
+  <Project Path="IncidentManagement.Tests/IncidentManagement.Tests.csproj" />
+</Solution>
