@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="IncidentManagement.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IncidentManagement.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:domain="using:IncidentManagement.Domain.Incidents"
+    mc:Ignorable="d"
+    Title="Incident Management">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid Padding="24" ColumnSpacing="24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Spacing="12">
+            <TextBlock
+                Text="Skapa incident"
+                Style="{StaticResource TitleTextBlockStyle}" />
+
+            <TextBox
+                Header="Titel"
+                Text="{x:Bind ViewModel.Title, Mode=TwoWay}" />
+
+            <TextBox
+                Header="Beskrivning"
+                AcceptsReturn="True"
+                Height="120"
+                TextWrapping="Wrap"
+                Text="{x:Bind ViewModel.Description, Mode=TwoWay}" />
+
+            <ComboBox
+                Header="Prioritet"
+                ItemsSource="{x:Bind ViewModel.PriorityOptions}"
+                SelectedItem="{x:Bind ViewModel.SelectedPriority, Mode=TwoWay}" />
+
+            <Button
+                Content="Spara incident"
+                Command="{x:Bind ViewModel.CreateIncidentCommand}" />
+
+            <ProgressRing
+                IsActive="{x:Bind ViewModel.IsBusy, Mode=OneWay}"
+                Width="28"
+                Height="28" />
+
+            <TextBlock
+                Text="{x:Bind ViewModel.Message, Mode=OneWay}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Spacing="12">
+            <TextBlock
+                Text="Incidenter"
+                Style="{StaticResource TitleTextBlockStyle}" />
+
+            <ListView ItemsSource="{x:Bind ViewModel.Incidents, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="domain:Incident">
+                        <Border
+                            Padding="12"
+                            Margin="0,0,0,8"
+                            BorderThickness="1"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            CornerRadius="8">
+                            <StackPanel Spacing="4">
+                                <TextBlock
+                                    Text="{x:Bind Title}"
+                                    Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                                <TextBlock
+                                    Text="{x:Bind Description}"
+                                    TextWrapping="Wrap" />
+
+                                <TextBlock
+                                    Text="{x:Bind Priority}"
+                                    Opacity="0.7" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>

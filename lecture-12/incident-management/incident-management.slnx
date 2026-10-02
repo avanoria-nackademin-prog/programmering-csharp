@@ -4,4 +4,12 @@
   <Project Path="IncidentManagement.Domain/IncidentManagement.Domain.csproj" />
   <Project Path="IncidentManagement.Infrastructure/IncidentManagement.Infrastructure.csproj" />
   <Project Path="IncidentManagement.Tests/IncidentManagement.Tests.csproj" />
+  <Project Path="IncidentManagement.UI.Tests/IncidentManagement.UI.Tests.csproj">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
+  <Project Path="IncidentManagement.UI/IncidentManagement.UI.csproj">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
 </Solution>

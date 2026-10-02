@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IncidentManagement.UI.Tests (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "IncidentManagement.UI.Tests (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

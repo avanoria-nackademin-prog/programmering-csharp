@@ -4,13 +4,9 @@ using IncidentManagement.Domain.Incidents.Contracts;
 
 namespace IncidentManagement.Application.Incidents.Services;
 
-public sealed class IncidentService(
-    IIncidentRepository repository,
-    IIncidentNotifier notifier) : IIncidentService
+public sealed class IncidentService(IIncidentRepository repository, IIncidentNotifier notifier) : IIncidentService
 {
-    public async Task<CreateIncidentResult> CreateAsync(
-        CreateIncidentCommand command,
-        CancellationToken cancellationToken)
+    public async Task<CreateIncidentResult> CreateAsync(CreateIncidentCommand command, CancellationToken cancellationToken)
     {
         var incident = Incident.Create(
             command.Title,
@@ -19,18 +15,14 @@ public sealed class IncidentService(
 
         await repository.AddAsync(incident, cancellationToken);
 
-        var notificationSent =
-            await notifier.NotifyCreatedAsync(incident, cancellationToken);
+        var notificationSent = await notifier.NotifyCreatedAsync(incident, cancellationToken);
 
         return new CreateIncidentResult(incident, notificationSent);
     }
 
-    public Task<Incident?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken) =>
+    public Task<Incident?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         repository.GetByIdAsync(id, cancellationToken);
 
-    public Task<IReadOnlyList<Incident>> GetAllAsync(
-        CancellationToken cancellationToken) =>
+    public Task<IReadOnlyList<Incident>> GetAllAsync(CancellationToken cancellationToken) =>
         repository.GetAllAsync(cancellationToken);
 }

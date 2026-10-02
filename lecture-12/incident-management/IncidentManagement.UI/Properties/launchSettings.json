@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "IncidentManagement.UI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "IncidentManagement.UI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
